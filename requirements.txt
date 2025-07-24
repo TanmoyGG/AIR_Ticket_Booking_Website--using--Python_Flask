@@ -1,0 +1,10 @@
+Flask
+Flask-Login
+Flask-Bcrypt
+mysql-connector-python # Added for MySQL connection
+# Add other dependencies like pandas, matplotlib if still needed for visualization/reports
+pandas
+matplotlib
+networkx
+bcrypt # Add bcrypt for password hashing
+reportlab  # PDF generation library
