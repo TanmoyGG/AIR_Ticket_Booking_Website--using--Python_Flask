@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Timetable - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body style="background: url('{{ url_for('static', filename='images/user.jpg') }}') no-repeat center center fixed; background-size: cover;">
+    {% include 'admin/nav.html' %}
+
+    <div class="container py-5">
+        <h2 class="text-center display-5 fw-bold text-white mb-4 text-shadow-lg">
+            <i class="fas fa-calendar-alt fa-lg me-2"></i>Manage Flight Timetable
+        </h2>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-11">
+                <div class="card shadow-lg border-0" style="background-color: rgba(248, 249, 250, 0.95);">
+                    <div class="card-header bg-gradient bg-secondary text-white">
+                        <i class="fas fa-list me-2"></i>Flight Schedule List
+                    </div>
+                    <div class="card-body p-4">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="alert alert-dismissible fade show {% if category == 'error' %}alert-danger{% elif category == 'success' %}alert-success{% else %}alert-info{% endif %}" role="alert">
+                                {% for category, message in messages %}
+                                    <i class="fas {% if category == 'error' %}fa-exclamation-triangle{% elif category == 'success' %}fa-check-circle{% else %}fa-info-circle{% endif %} me-2"></i>{{ message }}
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% if error %}
+                            <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <div>{{ error }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <div class="table-responsive mb-0">
+                            <table class="table table-striped table-hover align-middle rounded shadow-sm mb-0" style="background-color: transparent;">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Departure City</th>
+                                        <th>Arrival City</th>
+                                        <th>Departs</th>
+                                        <th>Arrives</th>
+                                        <th>Econ Fare (£)</th>
+                                        <th>Bus Fare (£)</th>
+                                        <th>Econ Cap</th>
+                                        <th>Bus Cap</th>
+                                        <th>Total Cap</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if flights %}
+                                    {% for flight in flights %}
+                                    <tr>
+                                        <td>{{ flight.flight_id }}</td>
+                                        <td>{{ flight.departure_city }}</td>
+                                        <td>{{ flight.arrival_city }}</td>
+                                        <td>{{ flight.departure_time }}</td>
+                                        <td>{{ flight.arrival_time }}</td>
+                                        <td>{{ "%.2f"|format(flight.economy_fare) }}</td>
+                                        <td>{{ "%.2f"|format(flight.business_fare) }}</td>
+                                        <td>{{ flight.economy_capacity }}</td>
+                                        <td>{{ flight.business_capacity }}</td>
+                                        <td>{{ flight.total_capacity }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ url_for('admin.edit_schedule', schedule_id=flight.flight_id) }}" class="btn btn-sm btn-outline-dark me-1" title="Edit Schedule"><i class="fas fa-edit"></i></a>
+                                            <form method="POST" action="{{ url_for('admin.delete_schedule', schedule_id=flight.flight_id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete schedule ID {{ flight.flight_id }}? This action cannot be undone.');">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Schedule"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="11" class="text-center text-muted fst-italic py-3">No flights found in the timetable.</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center bg-light">
+                        <a href="{{ url_for('admin.add_schedule') }}" class="btn btn-secondary"><i class="fas fa-calendar-plus me-1"></i> Add New Schedule</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

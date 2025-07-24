@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/account.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/login.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Account - Horizon Airlines Bookings</title>
+</head>
+<body style="background: url('{{ url_for('static', filename='images/account_user.jpg') }}') no-repeat center center fixed; background-size: cover;">
+    {% include "nav-bar.html" %}
+
+    <section class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+
+                <div class="card shadow-lg bg-white bg-opacity-75 mb-4">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <img src="../static/images/round-account-button-with-user-inside.png" alt="User Icon" class="me-3 account-icon">
+                        <h2 class="h5 mb-0"><i class="fas fa-user-circle me-2"></i>Account Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2"><i class="fas fa-user me-2 text-secondary"></i><strong>Name:</strong> {{ user_name }}</p>
+                        <p class="mb-3"><i class="fas fa-envelope me-2 text-secondary"></i><strong>Email:</strong> {{ user_email }}</p>
+                        <div class="d-flex justify-content-end flex-wrap gap-2">
+                            <button class="btn btn-warning btn-sm" id="update-details-main"><i class="fas fa-edit me-1"></i>Update Details</button>
+                            <form id="delete-account-form" action="{{ url_for('account.delete_account') }}" method="post" class="mb-0">
+                                <button type="button" class="btn btn-danger btn-sm" id="delete-account-btn"><i class="fas fa-trash-alt me-1"></i>Delete Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="update-details" class="update-details" style="display: none;">
+                    <div class="card bg-white bg-opacity-75 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="h6 mb-0"><i class="fas fa-user-edit me-2"></i>Update Account Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{{ url_for('account.update_account') }}">
+                                <div class="mb-3 input-group input-group-sm">
+                                    <span class="input-group-text"><i class="fas fa-user fa-fw"></i></span>
+                                    <input type="text" name="user_name" class="form-control" value="{{ user_name }}" placeholder="Full Name" required>
+                                </div>
+                                <div class="mb-3 input-group input-group-sm">
+                                    <span class="input-group-text"><i class="fas fa-envelope fa-fw"></i></span>
+                                    <input type="email" name="user_new_email" class="form-control" value="{{ user_email }}" placeholder="Email Address" required>
+                                </div>
+                                <div class="mb-3 input-group input-group-sm">
+                                    <span class="input-group-text"><i class="fas fa-lock fa-fw"></i></span>
+                                    <input type="password" name="user_password" class="form-control" placeholder="Enter New Password to Change" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check me-1"></i>Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="../static/JS/deleteAccount.js"></script>
+    <script src="../static/JS/updateAccountDetails.js"></script>
+    <!-- Confirmation for delete account -->
+    <script>
+      document.getElementById('delete-account-btn').addEventListener('click', function() {
+        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+          document.getElementById('delete-account-form').submit();
+        }
+      });
+      // Toggle update details script
+      document.getElementById('update-details-main').addEventListener('click', function() {
+        var upd = document.getElementById('update-details');
+        if (upd.style.display === 'none' || upd.style.display === '') {
+          upd.style.display = 'block';
+        } else {
+          upd.style.display = 'none';
+        }
+      });
+    </script>
+
+</body>
+</html>

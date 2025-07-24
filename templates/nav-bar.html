@@ -1,0 +1,33 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm"> <!-- Use Bootstrap bg class, add shadow -->
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="{{ url_for('homepage.homepage') }}"><i class="fas fa-plane-departure me-2"></i>Horizon Airlines</a> <!-- Added fw-bold -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center"> <!-- align-items-center for vertical alignment -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'homepage.homepage' %}active{% endif %}" {% if request.endpoint == 'homepage.homepage' %}aria-current="page"{% endif %} href="{{ url_for('homepage.homepage') }}">
+            <i class="fas fa-home me-1"></i>Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'flights.search_flights' %}active{% endif %}" {% if request.endpoint == 'flights.search_flights' %}aria-current="page"{% endif %} href="{{ url_for('flights.search_flights') }}">
+            <i class="fas fa-search me-1"></i>Flights <!-- Changed icon -->
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'account.account' %}active{% endif %}" {% if request.endpoint == 'account.account' %}aria-current="page"{% endif %} href="{{ url_for('account.account') }}">
+            <i class="fas fa-user-circle me-1"></i>Account <!-- Changed icon -->
+          </a>
+        </li>
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0"> <!-- Add margin for spacing, handle mobile stacking -->
+          <a class="btn btn-danger btn-sm" href="{{ url_for('login.logout') }}"> <!-- Changed to btn-danger -->
+            <i class="fas fa-sign-out-alt me-1"></i>Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

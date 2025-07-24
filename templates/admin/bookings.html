@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=width=device-width, initial-scale=1.0">
+    <title>Manage Bookings - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/admin.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body style="background: url('{{ url_for('static', filename='images/user.jpg') }}') no-repeat center center fixed; background-size: cover;">
+    {% include 'admin/nav.html' %}
+    <div class="container-fluid py-5">
+        <h2 class="text-center display-5 fw-bold text-white mb-4 text-shadow-lg">
+            <i class="fas fa-ticket-alt me-2 text-white"></i>Booking Management
+        </h2>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-11">
+                <div class="card shadow-lg border-0" style="background-color: rgba(248, 249, 250, 0.95);">
+                    <div class="card-header bg-gradient bg-secondary text-white">
+                        <i class="fas fa-list me-2"></i>All Bookings
+                    </div>
+                    <div class="card-body p-4">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="alert alert-dismissible fade show {% if category == 'error' %}alert-danger{% elif category == 'success' %}alert-success{% else %}alert-info{% endif %}" role="alert">
+                                {% for category, message in messages %}
+                                    <i class="fas {% if category == 'error' %}fa-exclamation-triangle{% elif category == 'success' %}fa-check-circle{% else %}fa-info-circle{% endif %} me-2"></i>{{ message }}
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% if error %}
+                            <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <div>{{ error }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        <div class="table-responsive mb-0">
+                            <table class="table table-striped table-hover table-bordered align-middle mb-0 w-100 rounded shadow-sm">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Email</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Date</th>
+                                        <th>Depart</th>
+                                        <th>Arrive</th>
+                                        <th>Class</th>
+                                        <th>Seats</th>
+                                        <th>Price (£)</th>
+                                        <th>Status</th>
+                                        <th class="text-center">Update Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if bookings %}
+                                    {% for b in bookings %}
+                                    <tr>
+                                        <td>{{ b.booking_id }}</td>
+                                        <td>{{ b.username }}</td>
+                                        <td>{{ b.email }}</td>
+                                        <td>{{ b.departure_city }}</td>
+                                        <td>{{ b.arrival_city }}</td>
+                                        <td>{{ b.departure_date }}</td>
+                                        <td>{{ b.departure_time }}</td>
+                                        <td>{{ b.arrival_time }}</td>
+                                        <td><span class="badge {% if b.seat_type == 'Business' %}bg-warning text-dark{% else %}bg-info text-dark{% endif %}">{{ b.seat_type }}</span></td>
+                                        <td>{{ b.num_seats }}</td>
+                                        <td>{{ "%.2f"|format(b.total_price) }}</td>
+                                        <td>
+                                            <span class="badge {% if b.status == 'Confirmed' %}bg-success{% elif b.status == 'Cancelled' %}bg-danger{% else %}bg-warning text-dark{% endif %}">{{ b.status }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <form method="post" action="{{ url_for('admin.update_booking_status', booking_id=b.booking_id) }}" class="d-inline">
+                                                <select name="status" class="form-select form-select-sm d-inline-block w-auto me-1" aria-label="Update status">
+                                                    {% for st in ['Confirmed', 'Pending', 'Cancelled'] %}
+                                                    <option value="{{ st }}" {% if b.status == st %}selected{% endif %}>{{ st }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary" title="Update Status"><i class="fas fa-sync-alt"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="13" class="text-center text-muted fst-italic py-3">No bookings found.</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

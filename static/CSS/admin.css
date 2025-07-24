@@ -1,0 +1,267 @@
+
+/* Admin Dashboard Styles */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background: #f4f7fa; */ /* Removed, using background image */
+    color: #333;
+}
+
+/* Text shadow utility */
+.text-shadow-lg {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Dashboard card styling */
+.dashboard-card {
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly opaque white */
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced hover shadow */
+}
+
+/* Icon wrapper styling */
+.dashboard-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+/* Ensure outline buttons have good contrast */
+.dashboard-card .btn-outline-primary {
+    border-color: var(--bs-primary);
+    color: var(--bs-primary);
+}
+.dashboard-card .btn-outline-primary:hover {
+    background-color: var(--bs-primary);
+    color: white;
+}
+/* Repeat for other colors (success, warning, info) */
+.dashboard-card .btn-outline-success {
+    border-color: var(--bs-success);
+    color: var(--bs-success);
+}
+.dashboard-card .btn-outline-success:hover {
+    background-color: var(--bs-success);
+    color: white;
+}
+.dashboard-card .btn-outline-warning {
+    border-color: var(--bs-warning);
+    color: var(--bs-warning);
+}
+.dashboard-card .btn-outline-warning:hover {
+    background-color: var(--bs-warning);
+    color: black; /* Adjust text color for better contrast on yellow */
+}
+.dashboard-card .btn-outline-info {
+    border-color: var(--bs-info);
+    color: var(--bs-info);
+}
+.dashboard-card .btn-outline-info:hover {
+    background-color: var(--bs-info);
+    color: white;
+}
+
+/* Remove or comment out old/conflicting styles */
+/* header {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header h1 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+.logout-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+}
+.logout-link:hover {
+    text-decoration: underline;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+nav li {
+    margin-right: 1.5rem;
+}
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 500;
+}
+nav a:hover {
+    text-decoration: underline;
+} */
+
+/* Dashboard card grid - Bootstrap handles this now */
+/* .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+.content h2,
+.content h3 {
+    margin-top: 0;
+    color: #2c3e50;
+} */
+
+/* Card style for sections - Replaced by .dashboard-card */
+/* .content section {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.content section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.content section h3 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 0.8rem;
+}
+.content section p {
+    flex: 1;
+    color: #555;
+    margin-bottom: 1rem;
+}
+.content section .button {
+    align-self: flex-start;
+    padding: 0.7rem 1.4rem;
+    font-size: 1rem;
+} */
+
+/* Responsive adjustments - Bootstrap handles this */
+/* @media (max-width: 600px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+} */
+
+/* section h3 {
+    margin-top: 0;
+} */
+
+/* a.button {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+}
+a.button:hover {
+    background: #2980b9;
+} */
+
+/* Admin tables - Keep for other admin pages */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+th {
+    background: linear-gradient(90deg, #2980b9, #3498db);
+    color: #fff;
+    font-weight: 600;
+}
+tbody tr:nth-child(odd) {
+    background: #f4f7fa;
+}
+tbody tr:hover {
+    background: #e1f0ff;
+}
+
+/* Flash messages - Keep */
+.flash-messages ul {
+    list-style: none;
+    padding: 0;
+}
+.flash-messages li {
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.flash-messages .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.flash-messages .error   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.flash-messages .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+
+/* Responsive nav - Keep for nav.html */
+/* @media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+    nav li {
+        margin-bottom: 1rem;
+    }
+} */
+
+/* Center tables - Keep for other admin pages */
+.table-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.table-center table {
+    width: auto;
+    min-width: 60%;
+    margin: 0 auto;
+}
+
+/* Admin nav hover and active states */
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+}
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+.navbar-nav .nav-link.active {
+    background-color: rgba(13, 202, 240, 0.8);
+    color: #fff !important;
+}
+
+/* Logout button hover effect */
+.btn-outline-danger {
+    transition: all 0.2s ease;
+}
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+    box-shadow: 0 0 0.5rem rgba(220, 53, 69, 0.5);
+    transform: translateY(-1px);
+}

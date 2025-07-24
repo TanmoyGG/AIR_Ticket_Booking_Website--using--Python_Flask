@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/homepage.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/footer.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Your Bookings - Horizon Airlines</title>
+</head>
+<body class="homepage-body">
+
+    {% include "nav-bar.html" %}
+
+    <div class="container my-5">
+        <div class="welcome-banner text-white p-4 rounded shadow-lg text-center mb-5">
+            <h1 class="display-5"><i class="fas fa-user-circle me-2"></i>Welcome, {{ user_name | default('Guest') }}!</h1>
+            <p class="lead">Manage your upcoming flight bookings below.</p>
+        </div>
+
+        <section class="main-content">
+            <div class="flight-bookings shadow">
+                <div class="flight-bookings-title bg-gradient bg-primary text-white p-3 rounded-top mb-0">
+                    <h2 class="h4 mb-0"><i class="fas fa-plane-departure me-2"></i>Your Flight Bookings</h2>
+                </div>
+                {% if has_bookings %}
+                <div class="table-responsive rounded-bottom bg-light">
+                    <table class="table table-hover table-striped align-middle mb-0 bookings-table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">From</th>
+                                <th scope="col">To</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Departs</th>
+                                <th scope="col">Seats</th>
+                                <th scope="col">Class</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in bookings %}
+                            <tr>
+                                <th scope="row">{{ b.booking_id }}</th>
+                                <td><i class="fas fa-map-marker-alt me-1 text-primary"></i>{{ b.departure_city }}</td>
+                                <td><i class="fas fa-map-marker-alt me-1 text-success"></i>{{ b.arrival_city }}</td>
+                                <td><i class="fas fa-calendar-alt me-1 text-muted"></i>{{ b.departure_date.strftime('%d %b %Y') if b.departure_date else 'N/A' }}</td>
+                                <td><i class="fas fa-clock me-1 text-muted"></i>{{ b.departure_time_str }}</td>
+                                <td><i class="fas fa-chair me-1 text-muted"></i>{{ b.num_seats }}</td>
+                                <td><span class="badge {{ 'bg-warning text-dark' if b.seat_type == 'Business' else 'bg-info text-dark' }}">{{ b.seat_type }}</span></td>
+                                <td><i class="fas fa-pound-sign me-1 text-muted"></i>{{ "%.2f"|format(b.total_price) }}</td>
+                                <td>
+                                    <form method="post" action="{{ url_for('homepage.cancel_booking') }}" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel booking #{{ b.booking_id }}? This action cannot be undone.');">
+                                        <input type="hidden" name="booking_id" value="{{ b.booking_id }}">
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt me-1"></i>Cancel</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="no-bookings-message d-flex justify-content-center align-items-center p-5 bg-light rounded-bottom">
+                    <div class="text-center text-muted">
+                        <i class="fas fa-info-circle fa-4x mb-3 text-primary"></i>
+                        <h2 class="h4 mb-3">No upcoming bookings found.</h2>
+                        <p>Ready for your next adventure?</p>
+                        <a href="{{ url_for('flights.search_flights') }}" class="btn btn-lg btn-success"><i class="fas fa-search me-2"></i>Find Flights Now</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

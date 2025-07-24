@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Schedules - Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    {% include 'admin/nav.html' %}
+    <div class="content">
+        <h2>Flight Schedules</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}<ul class="flash-messages">{% for cat,msg in messages %}<li class="{{cat}}">{{msg}}</li>{% endfor %}</ul>{% endif %}
+        {% endwith %}
+        {% if error %}<p class="error">{{ error }}</p>{% endif %}
+        <p><a href="{{ url_for('admin.add_schedule') }}">Add New Schedule</a></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Route ID</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Capacity</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in schedules %}
+                <tr>
+                    <td>{{ s.schedule_id }}</td>
+                    <td>{{ s.departure_city }}→{{ s.arrival_city }}</td>
+                    <td>{{ s.departure_time }}</td>
+                    <td>{{ s.arrival_time }}</td>
+                    <td>{{ s.total_capacity }}</td>
+                    <td>{{ 'Yes' if s.is_active else 'No' }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.edit_schedule', schedule_id=s.schedule_id) }}">Edit</a>
+                        <form method="post" action="{{ url_for('admin.delete_schedule', schedule_id=s.schedule_id) }}" style="display:inline;" onsubmit="return confirm('Delete schedule?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

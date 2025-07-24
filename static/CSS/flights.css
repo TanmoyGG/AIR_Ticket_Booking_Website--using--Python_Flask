@@ -1,0 +1,131 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* General Body Styling */
+body.flights-page-body {
+    background: url('../images/search.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Main container for search elements */
+.flight-search-container {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque */
+    backdrop-filter: blur(5px); /* Optional: Add a subtle blur effect */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Available Routes Card */
+.available-routes-card .card-header {
+    font-size: 1.1rem;
+}
+
+.route-item {
+    font-size: 0.95rem;
+    color: #495057; /* Bootstrap secondary text color */
+}
+
+/* Search Form Card */
+.search-form-card .card-header {
+    font-size: 1.1rem;
+}
+
+.search-form-card .form-label {
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* Make form elements slightly larger for better touch interaction */
+.search-form-card .form-select-lg,
+.search-form-card .form-control-lg {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    font-size: 1rem;
+}
+
+/* Flight Result Cards */
+.flight-result-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: none; /* Remove default border, rely on shadow */
+}
+
+.flight-result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced shadow on hover */
+}
+
+.flight-result-card .card-header {
+    border-bottom: 1px solid #dee2e6; /* Subtle separator */
+}
+
+.flight-result-card .card-body p {
+    margin-bottom: 0.5rem; /* Consistent spacing */
+}
+
+.flight-result-card .fa-fw {
+    width: 1.5em; /* Ensure icons align nicely */
+}
+
+.pricing-details .text-danger {
+    font-size: 0.95rem;
+}
+
+.pricing-details h5 {
+    font-size: 1.3rem;
+}
+
+.book-flight-btn {
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+}
+
+/* Heading for search results */
+.search-results-heading {
+    color: #333; /* Darker color for better contrast */
+    font-weight: 500;
+}
+
+/* No Flights Found Message */
+.no-flights-message {
+    border: 1px dashed #ced4da; /* Dashed border */
+    background-color: #f8f9fa; /* Lighter background */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #212529; /* Darker footer */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .flight-search-container {
+        padding: 1.5rem !important;
+    }
+    .display-5 {
+        font-size: 2.5rem;
+    }
+    .search-form-card .form-select-lg,
+    .search-form-card .form-control-lg {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .route-item {
+        font-size: 0.9rem;
+    }
+    .flight-result-card .card-body {
+        font-size: 0.9rem;
+    }
+    .pricing-details h5 {
+        font-size: 1.1rem;
+    }
+    .book-flight-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+}

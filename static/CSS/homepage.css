@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body.homepage-body {
+    background: url('../images/home.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); /* Darker overlay for text contrast */
+    border-radius: 0.5rem;
+}
+
+.welcome-banner h1 {
+    font-weight: 300; /* Lighter font weight for elegance */
+}
+
+.flight-bookings {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border-radius: 0.5rem;
+    overflow: hidden; /* Ensures rounded corners apply to children */
+}
+
+.flight-bookings-title {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.main-content {
+    position: relative;
+    flex-grow: 1; /* Allows content to push footer down */
+    min-height: 100vh;
+    padding-bottom: 80px; /* Ensure space above footer */
+}
+
+.bookings-table th {
+    background-color: #343a40; /* Bootstrap dark color */
+    color: #fff;
+}
+
+.bookings-table th, .bookings-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.bookings-table th:nth-child(2),
+.bookings-table td:nth-child(2),
+.bookings-table th:nth-child(3),
+.bookings-table td:nth-child(3) {
+    text-align: left;
+}
+
+.bookings-table td i {
+    opacity: 0.8;
+    margin-right: 5px;
+}
+
+.bookings-table i {
+    opacity: 0.7;
+}
+
+.bookings-table .badge {
+    font-size: 0.85em;
+    padding: 0.4em 0.7em;
+}
+
+.no-bookings-message {
+    background-color: rgba(248, 249, 250, 0.9); /* Slightly transparent light background */
+    border-radius: 0 0 0.5rem 0.5rem; /* Match parent rounding */
+}
+
+.no-bookings-message i {
+    color: #0d6efd; /* Bootstrap primary color */
+}
+
+.no-bookings-message h2 {
+    color: #6c757d; /* Bootstrap secondary color */
+}
+
+@media (max-width: 768px) {
+    .welcome-banner h1 {
+        font-size: 2rem;
+    }
+    .bookings-table {
+        font-size: 0.9rem;
+    }
+}
