@@ -12,7 +12,7 @@
 
 ## 📋 Table of Contents
 - [Project Description](#-project-description)
-- [Tech Stack](#-tech-stack)
+
 - [Features](#-features)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
@@ -20,8 +20,6 @@
   - [Database Setup](#database-setup)
 - [Usage](#-usage)
 - [Project Structure](#-project-structure)
-- [Database Schema](#-database-schema)
-- [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
